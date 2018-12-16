@@ -1,13 +1,11 @@
 #!groovy
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5'))])
-
+*/
 node ('slaves1'){
-   /* 
+   */ 
     stage('Checkout') { 
-   git branch: 'master', credentialsId: '21311c83-a7a7-4316-8a19-b5b828aaf1a9', url: ' https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
-
+   git branch: 'master', git credentialsId: '1ece1b5e-48b3-417e-ba8a-c6dd3bbc286f', url: 'https://github.com/bhavani02/maven-web-application.git'
    }
- */
  
  stage('Checkout'){
 
@@ -33,24 +31,25 @@ node ('slaves1'){
        bat 'mvn sonar:sonar'   
       }
    }
-    
-    stage('NexusDeploy')
+    */
+    stage('install')
    {
     if(isUnix()){
-     sh 'mvn deploy'
+     sh 'mvn install'
       }
       else{
-       bat 'mvn deploy'   
+       bat 'mvn install'   
       }
    }
-   
+   /*
    stage ('Deploy to Tomcat'){
        
        sh 'echo deploying application into tomcat'
-       sh 'cp $WORKSPACE/target/*.war /Users/bhaskarreddyl/BhaskarReddyL/Softwares/Running/apache-tomcat-9.0.12/webapps/'
+       sh 'scp /var/lib/jenkins/workspace/Ant-web-application-Dev/dist/ant-web-application.war ec2-user@172.31.26.51:/opt/apache-tomcat-9.0.13/webapps'
        sh 'echo deploymnet done'
    }
    */
+   /*
    stage ('Email Notifcation'){
        
        mail bcc: '', body: '''Build done
@@ -58,5 +57,5 @@ node ('slaves1'){
 Regards,
 Mithun Technologies''', cc: 'bhaskar0504@gmail.com', from: '', replyTo: '', subject: 'Deployment done', to: 'devopstrainingblr@gmail.com,satyaswarup.inbox@gmail.com'
    } 
-    
+    */
 }
